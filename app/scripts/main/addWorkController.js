@@ -41,6 +41,7 @@
                 timeToGo;
 
             // some calc
+            vm.workTime.timeToGo = new Date();
         }
 
         vm.save = function(newWorkTime) {
