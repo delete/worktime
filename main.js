@@ -10,7 +10,14 @@ var mainWindow = null;
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({maxWidth: 800, maxHeight: 600, resizable: false});
+  mainWindow = new BrowserWindow(
+    {
+      maxWidth: 800, 
+      maxHeight: 600, 
+      resizable: false,
+      fullscreenable: false
+    }
+  );
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/app/index.html`);
