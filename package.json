@@ -1,0 +1,20 @@
+{
+  "name": "WorkTime",
+  "version": "0.0.1",
+  "description": "Know the exactly time do you need to get out from work.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/delete/worktime",
+  "keywords": [
+    "Electron",
+    "work",
+    "time"
+  ],
+  "author": "Fellipe Pinheiro",
+  "dependencies": {
+    "electron": "^1.4.3",
+    "bower": "^1.7.9"
+  }
+}
