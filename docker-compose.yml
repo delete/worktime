@@ -1,0 +1,8 @@
+version: '2'
+
+services:  
+  worktime:
+    build: .
+    expose:
+      - 80
+      - 443

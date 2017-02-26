@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Worktime</title>
+</head>
+<body>
+  <h1 class="title">Worktime</h1>
+  <div id="app" class="app">
+    <form name="work_form" class="form">
+      <div>
+        <input type="time" class="time__input" v-model="arrived">
+        <label class="time__label">Arrived</label>
+      </div>
+      <div>
+        <input type="time" class="time__input" v-model="lunchTime">
+        <label class="time__label">Lunch time</label>
+      </div>
+      <div>
+        <input type="time" class="time__input" v-model="secondRound">
+        <label class="time__label">Second round</label>
+      </div>
+    </form>
+
+    <div class="result">You'll get out at: <span class="result__time">{{ calculate }}</span></div>
+  </div>
+
+  <script src="assets/vue.js"></script>
+  <script src="assets/moment.min.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        TOTAL_HOURS: 8 * 60 * 60,
+        TOLERANCE: 10 * 60,
+        arrived: '08:00',
+        lunchTime: '12:00',
+        secondRound: '13:00'
+      },
+      computed: {
+        calculate: function () {          
+          var arrived = this.calculateTimeInSeconds(moment(this.arrived, 'h:mm'))
+          var lunchTime = this.calculateTimeInSeconds(moment(this.lunchTime, 'h:mm'))
+          var secondRound = this.calculateTimeInSeconds(moment(this.secondRound, 'h:mm'))
+          
+          var getOut = arrived + this.TOTAL_HOURS + (secondRound - lunchTime) - this.TOLERANCE
+          return new Date(getOut * 1000).toISOString().substr(11, 8)
+        }
+      },
+      methods: {
+        calculateTimeInSeconds: function (date) {
+          return ( (date.hour() * 3600) + (date.minutes() * 60) )
+        }
+      }
+    })
+  </script>
+
+  <style>
+    
+    body {
+      color: #7a7a7a;
+    }
+
+    .title {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .form {
+      display: flex;
+      margin: 50px;
+    }
+
+    @media screen and (min-width: 600px) {
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+      }
+
+      .title {
+        margin: 0;
+        border-bottom: 1px solid #d9d9d9;
+       }
+
+      .form {
+        display: block;
+      }
+    }
+
+    .time__input {
+      padding: 10px;
+      font-size: 26px;      
+      border: 0;
+      box-shadow: 1px 1px 10px 1px #c3c3c3;
+      margin: 10px;
+      color: #7a7a7a;
+    }
+
+    .result {
+      text-align: center;
+      margin: 50px;
+      font-size: 28px;
+      color: #7a7a7a;
+    }
+
+    .result__time {
+      font-size: 40px;
+      font-weight: 400;
+      transition: all 300ms;
+    }
+
+    .zoom {
+      transform: scale(1.2);
+    }
+  </style>
+</body>
+</html>

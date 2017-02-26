@@ -1,9 +1,10 @@
 # worktime
 
-## Download and install vendors files
+## Production
 
-`npm install && bower install`
+`docker-compose build && docker-compose up`
 
-## Run the app
+## Developer
 
-`./node_modules/electron/dist/electron main.js`
+`npm install`
+`npm start`
