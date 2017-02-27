@@ -4,10 +4,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
   <title>Worktime</title>
+
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <h1 class="title">Work<span class="attention">Time</h1>
-  <div id="app" class="app">
+  <div id="app" class="app" v-cloak>
     <form name="work_form" class="form">
       <div>
         <input type="time" class="time__input" v-model="arrived">
@@ -23,7 +25,7 @@
       </div>
     </form>
 
-    <div class="result">You'll get out at: <span class="result__time attention">{{ calculate }}</span></div>
+    <div class="result">You'll get out at: <span class="result__time attention" v-cloak>{{ calculate }}</span></div>
   </div>
 
   <script src="assets/vue.min.js"></script>
@@ -56,70 +58,5 @@
       }
     })
   </script>
-
-  <style>
-    
-    body {
-      color: #7a7a7a;
-      font-size: 16px;
-    }
-
-    .title {
-      margin-top: 50px;
-      text-align: center;
-      font-size: 2.5em;
-    }
-
-    .form {
-      display: flex;
-      flex-direction: column;
-      margin: 40px;
-      margin-right: 25px;
-    }
-
-    @media screen and (min-width: 600px) {
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 95vh;
-        width: 99%;
-      }
-
-      .title {
-        margin: 0;
-       }
-
-      .form {
-        display: block;
-      }
-    }
-
-    .time__input {
-      padding: 10px;
-      font-size: 1.2em;      
-      border: 0;
-      box-shadow: 1px 1px 10px 1px #c3c3c3;
-      margin: 10px;
-      color: #7a7a7a;
-    }
-
-    .result {
-      text-align: center;
-      margin: 50px;
-      font-size: 28px;
-      color: #7a7a7a;
-    }
-
-    .result__time {
-      font-size: 40px;
-      font-weight: 400;
-      transition: all 300ms;
-    }
-
-    .attention {
-      color: #465C90;
-    }
-  </style>
 </body>
 </html>
