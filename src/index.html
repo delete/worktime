@@ -25,7 +25,13 @@
       </div>
     </form>
 
-    <div class="result">You'll get out at: <span class="result__time attention" v-cloak>{{ calculate }}</span></div>
+    <div class="result">
+      You'll get out at: <span class="result__time attention" v-cloak>{{ calculate }}</span>
+      <div class="result__tolerance">You have -+10min of tolerance</div>
+    </div>
+    <span>{{datenow}}</span>
+    <span>{{getOut}}</span>
+    {{itIsTime}}
   </div>
 
   <script src="assets/vue.min.js"></script>
@@ -36,10 +42,16 @@
       el: '#app',
       data: {
         TOTAL_HOURS: 8 * 60 * 60,
-        TOLERANCE: 10 * 60,
         arrived: '08:00',
         lunchTime: '12:00',
-        secondRound: '13:00'
+        secondRound: '13:00',
+        getOut: '',
+        datenow: '',
+        notified: false
+      },
+      mounted: function() {
+        this.clockTime()
+        this.notified = false;
       },
       computed: {
         calculate: function () {          
@@ -47,13 +59,42 @@
           var lunchTime = this.calculateTimeInSeconds(moment(this.lunchTime, 'h:mm'))
           var secondRound = this.calculateTimeInSeconds(moment(this.secondRound, 'h:mm'))
           
-          var getOut = arrived + this.TOTAL_HOURS + (secondRound - lunchTime) - this.TOLERANCE
-          return new Date(getOut * 1000).toISOString().substr(11, 8)
+          this.getOut = arrived + this.TOTAL_HOURS + (secondRound - lunchTime)
+          return new Date(this.getOut * 1000).toISOString().substr(11, 8)
+        },
+        itIsTime: function () {
+          console.log(this.getOut >= this.datenow)
+          if ( !this.notified ) {
+            if ( this.getOut >= this.datenow ) {
+              this.notify()
+              this.notified = true;
+            }
+          }
         }
       },
       methods: {
         calculateTimeInSeconds: function (date) {
           return ( (date.hour() * 3600) + (date.minutes() * 60) )
+        },
+        clockTime: function() {
+          var self = this
+          this.datenow = this.calculateTimeInSeconds(moment())
+
+          setTimeout(self.clockTime, 1000)
+        },
+        notify: function () {
+          if ( Notification.permission === "granted" ){
+            sendMessage()
+          } else {
+            Notification.requestPermission(function (permission) {
+              if (permission === "granted") {
+                sendMessage()
+              }
+            })
+          }
+          function sendMessage() {
+            new Notification("It's time to get out! GOGOGO!")
+          }
         }
       }
     })
