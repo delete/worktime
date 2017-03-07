@@ -53,12 +53,29 @@ body {
   margin: 50px;
   font-size: 28px;
   color: #7a7a7a;
+  position: relative;
 }
 
 .result__time {
   font-size: 40px;
   font-weight: 400;
   transition: all 300ms;
+}
+
+.result__tolerance {
+  position: absolute;
+  opacity: 0;
+  transition: all 800ms;
+  font-size: .5em;
+  background-color: #465c90;
+  padding: 6px;
+  border-radius: 5px;
+  color: #fff;
+  right: 0;
+}
+
+.result:hover .result__tolerance {
+  opacity: 1;
 }
 
 .attention {
