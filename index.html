@@ -27,11 +27,10 @@
 
     <div class="result">
       You'll get out at: <span class="result__time attention" v-cloak>{{ calculate }}</span>
-      <div class="result__tolerance">You have -+10min of tolerance</div>
+      <div class="result__tolerance">You have 10 minutes of tolerance</div>
     </div>
-    {{itIsTime}}
+    {{ itIsTime }}
   </div>
-
   <script src="assets/vue.min.js"></script>
   <script src="assets/moment.min.js"></script>
 
@@ -43,13 +42,12 @@
         arrived: '08:00',
         lunchTime: '12:00',
         secondRound: '13:00',
-        getOut: '',
-        datenow: '',
+        getOut: '1',
+        datenow: '0',
         notified: false
       },
       mounted: function() {
-        this.clockTime()
-        this.notified = false;
+        this.clockTime()        
       },
       computed: {
         calculate: function () {          
@@ -61,12 +59,10 @@
           return new Date(this.getOut * 1000).toISOString().substr(11, 8)
         },
         itIsTime: function () {
-          console.log(this.getOut >= this.datenow)
-          if ( !this.notified ) {
-            if ( this.getOut >= this.datenow ) {
-              this.notify()
-              this.notified = true;
-            }
+          if ( this.notified ) return
+          
+          if ( this.getOut <= this.datenow ) {
+            this.notify()
           }
         }
       },
@@ -81,6 +77,7 @@
           setTimeout(self.clockTime, 1000)
         },
         notify: function () {
+          var self = this;
           if ( Notification.permission === "granted" ){
             sendMessage()
           } else {
@@ -91,7 +88,19 @@
             })
           }
           function sendMessage() {
-            new Notification("It's time to get out! GOGOGO!")
+            var options = {
+              body: 'GOGOGO!',
+              icon: 'assets/favicon.ico'
+            }
+            
+            notification = new Notification("It's time to get out!", options)
+            
+            notification.onclick = function (event) {
+              event.preventDefault()
+              self.notified = true
+              options.body = 'See you soon.'
+              new Notification("Notification deactivated for now!", options)
+            }
           }
         }
       }

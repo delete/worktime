@@ -71,7 +71,7 @@ body {
   padding: 6px;
   border-radius: 5px;
   color: #fff;
-  right: 0;
+  right: 80px;
 }
 
 .result:hover .result__tolerance {
