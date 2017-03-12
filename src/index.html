@@ -5,11 +5,25 @@
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
   <title>Worktime</title>
 
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1 class="title">Work<span class="attention">Time</h1>
   <div id="app" class="app" v-cloak>
+    <img 
+        v-if="hasNotificationPermission()" 
+        src="assets/notifications-on.svg" 
+        class="notificationBell" 
+        alt="Notification is on!"
+        title="Your notification is on!"></img>
+
+    <img 
+        v-else 
+        src="assets/notifications-off.svg" 
+        class="notificationBell"
+        alt="Notification is off!"
+        title="Your notification is off!"></img>
+
     <form name="work_form" class="form">
       <div>
         <input type="time" class="time__input" v-model="arrived">
@@ -29,82 +43,10 @@
       You'll get out at: <span class="result__time attention" v-cloak>{{ calculate }}</span>
       <div class="result__tolerance">You have 10 minutes of tolerance</div>
     </div>
-    {{ itIsTime }}
+    {{ isTime }}
   </div>
   <script src="assets/vue.min.js"></script>
   <script src="assets/moment.min.js"></script>
-
-  <script>
-    new Vue({
-      el: '#app',
-      data: {
-        TOTAL_HOURS: 8 * 60 * 60,
-        arrived: '08:00',
-        lunchTime: '12:00',
-        secondRound: '13:00',
-        getOut: '1',
-        datenow: '0',
-        notified: false
-      },
-      mounted: function() {
-        this.clockTime()        
-      },
-      computed: {
-        calculate: function () {          
-          var arrived = this.calculateTimeInSeconds(moment(this.arrived, 'h:mm'))
-          var lunchTime = this.calculateTimeInSeconds(moment(this.lunchTime, 'h:mm'))
-          var secondRound = this.calculateTimeInSeconds(moment(this.secondRound, 'h:mm'))
-          
-          this.getOut = arrived + this.TOTAL_HOURS + (secondRound - lunchTime)
-          return new Date(this.getOut * 1000).toISOString().substr(11, 8)
-        },
-        itIsTime: function () {
-          if ( this.notified ) return
-          
-          if ( this.getOut <= this.datenow ) {
-            this.notify()
-          }
-        }
-      },
-      methods: {
-        calculateTimeInSeconds: function (date) {
-          return ( (date.hour() * 3600) + (date.minutes() * 60) )
-        },
-        clockTime: function() {
-          var self = this
-          this.datenow = this.calculateTimeInSeconds(moment())
-
-          setTimeout(self.clockTime, 1000)
-        },
-        notify: function () {
-          var self = this;
-          if ( Notification.permission === "granted" ){
-            sendMessage()
-          } else {
-            Notification.requestPermission(function (permission) {
-              if (permission === "granted") {
-                sendMessage()
-              }
-            })
-          }
-          function sendMessage() {
-            var options = {
-              body: 'GOGOGO!',
-              icon: 'assets/favicon.ico'
-            }
-            
-            notification = new Notification("It's time to get out!", options)
-            
-            notification.onclick = function (event) {
-              event.preventDefault()
-              self.notified = true
-              options.body = 'See you soon.'
-              new Notification("Notification deactivated for now!", options)
-            }
-          }
-        }
-      }
-    })
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
