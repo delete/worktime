@@ -81,3 +81,16 @@ body {
 .attention {
   color: #465C90;
 }
+
+.notificationBell {
+  display: none;
+}
+
+@media screen and (min-height: 639px) {
+  .notificationBell {
+    display: block;
+    width: 26px;
+    position: absolute;
+    bottom: 5%;
+    left: calc(50% - 13px);
+  }
