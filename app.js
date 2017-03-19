@@ -5,8 +5,8 @@ new Vue({
     arrived: '08:00',
     lunchTime: '12:00',
     secondRound: '13:00',
-    getOut: '1',
-    datenow: '0',
+    getOut: 1,
+    datenow: 0,
     notified: false
   },
   mounted: function() {
