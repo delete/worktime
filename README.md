@@ -1,16 +1,34 @@
-# Work**Time**
+# Work**Time** 
 
-You can see a demo here [/worktime](https://delete.github.io/worktime/).
+> A Vue.js project to know when you will to get out
 
-## Production
+You can see a demo here [/worktime](https://delete.github.io/worktime/). 
 
-`docker-compose build && docker-compose up`
 
-### On gh-pages
+## Build Setup
 
-`npm run deploy`
+``` bash
+# install dependencies
+npm install
 
-## Developer
+# serve with hot reload at localhost:8080
+npm run dev
 
-`npm install`
-`npm start`
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
+
+# After build, you can run an staging server using express with
+npm start
+
+# Running into a Docker container
+docker-compose build && docker-compose up
+
+# Deploy to Github Pages
+npm run deploy
+
+# run e2e tests
+npm run e2e
+```

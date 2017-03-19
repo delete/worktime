@@ -3,6 +3,6 @@ version: '2'
 services:  
   worktime:
     build: .
-    expose:
-      - 80
-      - 443
+    ports:
+      - "80:80"
+      - "443:443"
