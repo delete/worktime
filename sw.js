@@ -1,6 +1,6 @@
 var cacheName = 'worktime1-0-0';
 var filesToCache = [
-  '/',
+  './',
   'index.html',
   'manifest.json',
   'style.css',
