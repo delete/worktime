@@ -1,15 +1,15 @@
 var cacheName = 'worktime1-0-0';
 var filesToCache = [
   '/',
-  'index.html',
-  'manifest.json',
-  'style.css',
-  'app.js',
-  '/assets/moment.min.js',
-  '/assets/vue.min.js',
-  '/assets/favicon.ico',
-  '/assets/notifications-on.svg',
-  '/assets/notifications-off.svg'
+  './index.html',
+  './manifest.json',
+  './style.css',
+  './app.js',
+  './assets/moment.min.js',
+  './assets/vue.min.js',
+  './assets/favicon.ico',
+  './assets/notifications-on.svg',
+  './assets/notifications-off.svg'
 ];
 
 self.addEventListener('install', function(e) {
