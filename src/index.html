@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
   <title>Worktime</title>
 
@@ -48,5 +49,14 @@
   <script src="assets/vue.min.js"></script>
   <script src="assets/moment.min.js"></script>
   <script src="app.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator
+        .serviceWorker
+        .register('./sw.js')
+        .then(function() { console.log('Service Worker Registered'); });
+    }
+  </script>
 </body>
 </html>
