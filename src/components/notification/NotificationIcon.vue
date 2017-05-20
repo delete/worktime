@@ -7,16 +7,19 @@
 </template>
 
 <script>
+  const notifyOn = require( './assets/notifications-on.svg' )
+  const notifyOff = require( './assets/notifications-off.svg' )
+
   export default {
     data() {
       return {
         permissionAllowed: {
-          src: 'static/img/notifications-on.svg',
+          src: notifyOn,
           alt: 'Notification is on!',
           title: 'Your notification is on!'
         },
         permissionDenied: {
-          src: 'static/img/notifications-off.svg',
+          src: notifyOff,
           alt: 'Notification is off!',
           title: 'Your notification is off!'
         },

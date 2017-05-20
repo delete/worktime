@@ -2,7 +2,7 @@ version: '2'
 
 services:  
   worktime:
-    build: .
+    image: delete/worktime
     ports:
       - "80:80"
       - "443:443"

@@ -5,7 +5,9 @@
 </template>
 <script>
   import moment from 'moment'
-  
+
+  const icon = require( './assets/notifications-on.svg' )
+
   export default {
     data() {
       return {
@@ -22,10 +24,6 @@
     computed: {
       isTime() {
         if ( this.notified ) return
-
-        console.warn( this.getOutTime <= this.datenow )
-        console.warn( this.getOutTime )
-        console.warn( this.datenow )
 
         if ( this.getOutTime <= this.datenow ) {
           this.notify()
@@ -53,7 +51,7 @@
       sendMessage() {
         const options = {
           body: 'GOGOGO!',
-          icon: 'static/img/favicon.ico'
+          icon
         }
 
         const notification = new Notification( 'It\'s time to get out!', options )
