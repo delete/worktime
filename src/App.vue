@@ -8,8 +8,8 @@
     <app-get-out-time 
         :time="times.getOutTime"></app-get-out-time>
     <app-notification-icon></app-notification-icon>
-    <app-clock-notification
-        :getOutTime="getOutTimeInSeconds"></app-clock-notification>
+    <app-notification-clock
+        :getOutTime="getOutTimeInSeconds"></app-notification-clock>
   </div>
 </template>
 
@@ -18,8 +18,8 @@ import moment from 'moment'
 
 import Form from './components/Form'
 import GetOutTime from './components/GetOutTime'
-import NotificationIcon from './components/NotificationIcon'
-import ClockNotification from './components/ClockNotification'
+import NotificationIcon from './components/notification/NotificationIcon'
+import NotificationClock from './components/notification/NotificationClock'
 
 export default {
   name: 'app',
@@ -27,7 +27,7 @@ export default {
     'app-form': Form,
     'app-get-out-time': GetOutTime,
     'app-notification-icon': NotificationIcon,
-    'app-clock-notification': ClockNotification
+    'app-notification-clock': NotificationClock
   },
   data() {
     return {
