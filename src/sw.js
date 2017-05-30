@@ -1,4 +1,4 @@
-var cacheName = 'worktime1-0-1';
+var cacheName = 'worktime1-0-2';
 var filesToCache = [
   './',
   './index.html',
