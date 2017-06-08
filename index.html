@@ -44,6 +44,15 @@
       You'll get out at: <span class="result__time attention" v-cloak>{{ calculate }}</span>
       <div class="result__tolerance">You have 10 minutes of tolerance</div>
     </div>
+
+    <div class="new-update" id="newUpdate">
+      <div class="new-update__content">
+        <p>Refresh to install the new version</p>
+        <span class="new-update__btn-close">x</span>
+      </div>
+    </div>
+    
+
     {{ isTime }}
   </div>
   <script src="assets/vue.min.js"></script>
@@ -55,8 +64,41 @@
       navigator
         .serviceWorker
         .register('./sw.js')
-        .then(function() { console.log('Service Worker Registered'); });
+        .then(function(registration) { 
+            registration.onupdatefound = function() {
+                if( navigator.serviceWorker.controller ) {
+                    const installingWorker = registration.installing;
+                    
+                    installingWorker.onstatechange = function() {
+                        switch ( installingWorker.state ) {
+                            case 'installed':
+                                console.log('New version to install');
+								document.getElementById('newUpdate').classList.add('new-update_show');
+                                break;
+                            case 'redundant':
+                                console.error('Worker already registered.');
+                                break;
+                            default:
+                                //ignore
+                        }
+                    }
+                }
+            }
+            console.log('Service Worker Registered');
+
+        }).catch(function(e) {
+            console.error('Error during service worker registration:', e);
+        });
     }
+  </script>
+  
+  <script>
+	const closeBtn = document.getElementById('newUpdate');
+	closeBtn.addEventListener('click', hideMesssage);
+	
+	function hideMesssage() {
+		this.classList.remove('new-update_show');
+	}
   </script>
 
   <script>
