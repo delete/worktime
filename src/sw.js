@@ -1,4 +1,4 @@
-var cacheName = 'worktime1-0-2';
+var cacheName = 'worktime1-0-3';
 var filesToCache = [
   './',
   './index.html',
@@ -40,14 +40,14 @@ self.addEventListener('activate', function(e) {
         }));
       })
       .then(function () {
-      console.log('[serviceWorker]: Clients Claims');
-      return self.clients.claim();
+      //console.log('[serviceWorker]: Clients Claims');
+        return self.clients.claim();
     })
   ); 
 });
 
 self.addEventListener('fetch', function(e) {
-  console.log('[ServiceWorker] Fetch', e.request.url);
+  //console.log('[ServiceWorker] Fetch', e.request.url);
   e.respondWith(
     caches.match(e.request).then(function(response) {
       return response || fetch(e.request);
