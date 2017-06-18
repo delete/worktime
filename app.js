@@ -70,6 +70,7 @@ new Vue({
     },
     hideMessage: function(event) {
         event.currentTarget.classList.remove('new-update_show')
+        window.location.reload()
     }
   }
 })

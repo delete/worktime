@@ -1,4 +1,4 @@
-const cacheName = 'worktime1-0-5';
+const cacheName = 'worktime1-0-6';
 const filesToCache = [
   './',
   './index.html',
