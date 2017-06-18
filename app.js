@@ -14,9 +14,9 @@ new Vue({
   },
   computed: {
     calculate: function () {          
-        var arrived = this.calculateTimeInSeconds(moment(this.arrived, 'h:mm'))
-        var lunchTime = this.calculateTimeInSeconds(moment(this.lunchTime, 'h:mm'))
-        var secondRound = this.calculateTimeInSeconds(moment(this.secondRound, 'h:mm'))
+        const arrived = this.calculateTimeInSeconds(moment(this.arrived, 'h:mm'))
+        const lunchTime = this.calculateTimeInSeconds(moment(this.lunchTime, 'h:mm'))
+        const secondRound = this.calculateTimeInSeconds(moment(this.secondRound, 'h:mm'))
         
         this.getOut = arrived + this.TOTAL_WORK_HOURS + (secondRound - lunchTime)
         return new Date(this.getOut * 1000).toISOString().substr(11, 8)
@@ -25,7 +25,7 @@ new Vue({
         if ( this.notified ) return
         
         if ( this.getOut <= this.datenow ) {
-        this.notify()
+            this.notify()
         }
     }
   },
@@ -34,28 +34,24 @@ new Vue({
         return ( (date.hour() * 3600) + (date.minutes() * 60) )
     },
     clockTime: function() {
-        var self = this
+        const self = this
         this.datenow = this.calculateTimeInSeconds(moment())
 
         setTimeout(self.clockTime, 1000)
     },
     notify: function () {
-        var self = this;
-
-        if ( !this.hasNotificationPermission() ){
-          if ( !this.requestNotificationPermission() ) return
-        } 
+        if ( !this.hasNotificationPermission() && !this.requestNotificationPermission() ) return 
         
         this.sendMessage()
     },
     sendMessage: function() {
-        var options = {
+        const options = {
           body: 'GOGOGO!',
           icon: 'assets/favicon.ico'
         }
-        var self = this;
+        const self = this;
         
-        var notification = new Notification("It's time to get out!", options)
+        const notification = new Notification("It's time to get out!", options)
         
         notification.onclick = function (event) {
           event.preventDefault()
@@ -71,6 +67,9 @@ new Vue({
     },
     hasNotificationPermission: function() {
         return Notification.permission === "granted"
+    },
+    hideMessage: function(event) {
+        event.currentTarget.classList.remove('new-update_show')
     }
   }
 })

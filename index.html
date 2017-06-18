@@ -45,14 +45,13 @@
       <div class="result__tolerance">You have 10 minutes of tolerance</div>
     </div>
 
-    <div class="new-update" id="newUpdate">
+    <div class="new-update" id="newUpdate" @click="hideMessage">
       <div class="new-update__content">
         <p>Refresh to install the new version</p>
         <span class="new-update__btn-close">x</span>
       </div>
     </div>
     
-
     {{ isTime }}
   </div>
   <script src="assets/vue.min.js"></script>
@@ -92,15 +91,6 @@
     }
   </script>
   
-  <script>
-	const closeBtn = document.getElementById('newUpdate');
-	closeBtn.addEventListener('click', hideMesssage);
-	
-	function hideMesssage() {
-		this.classList.remove('new-update_show');
-	}
-  </script>
-
   <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
