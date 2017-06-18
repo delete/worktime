@@ -1,5 +1,5 @@
-var cacheName = 'worktime1-0-3';
-var filesToCache = [
+const cacheName = 'worktime1-0-5';
+const filesToCache = [
   './',
   './index.html',
   './manifest.json',
