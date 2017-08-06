@@ -2,16 +2,28 @@
   display: none;
 }
 
+:root {
+  --main-font-color: #7a7a7a;
+  --main-bg-color: #fff;
+}
+
 body {
-  color: #7a7a7a;
+  color: var(--main-font-color);
+  background-color: var(--main-bg-color);
   font-size: 16px;
   user-select: none;
+}
+
+.app {
+  position: relative;
 }
 
 .title {
   margin-top: 50px;
   text-align: center;
   font-size: 2.5em;
+  position: relative;
+  margin-bottom: 85px;
 }
 
 .form {
@@ -32,7 +44,7 @@ body {
 
   .title {
     margin: 0;
-    margin-bottom: 97px;
+    margin-bottom: 89px;
    }
 
   .form {
@@ -44,7 +56,7 @@ body {
   padding: 10px;
   font-size: 1.2em;      
   border: 0;
-  box-shadow: 1px 1px 10px 1px #c3c3c3;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.18);
   margin: 10px;
   color: #7a7a7a;
 }
@@ -53,7 +65,7 @@ body {
   text-align: center;
   margin: 50px;
   font-size: 28px;
-  color: #7a7a7a;
+  color: var(--main-font-color);
   position: relative;
 }
 
@@ -75,6 +87,12 @@ body {
   right: 80px;
 }
 
+@media screen and (min-width: 600px) {
+  .result__tolerance {
+       top: 60px; 
+  }
+}
+
 .result:hover .result__tolerance {
   opacity: 1;
 }
@@ -91,7 +109,7 @@ body {
   .notificationBell {
     display: block;
     width: 26px;
-    position: absolute;
+    position: fixed;
     bottom: 5%;
     left: calc(50% - 13px);
   }
@@ -132,4 +150,19 @@ body {
   top: 5px;
   right: 8px;
   text-transform: uppercase;
+}
+
+.theme-icon {
+    cursor: pointer;
+    left: calc(50% - 13px);
+    position: absolute;
+    top: -70px;
+    width: 26px;
+  }
+
+@media screen and (min-height: 639px) {
+  .theme-icon {
+      top: 214px;
+      left: -127px;
+  }
 }

@@ -7,7 +7,18 @@ new Vue({
     secondRound: '13:00',
     getOut: 1,
     datenow: 0,
-    notified: false
+    notified: false,
+    themes: {
+      dark: {
+        color: '#d6d6d6',
+        bg: '#242C42'
+      },
+      light: {
+        color: '#7a7a7a',
+        bg: '#fff'
+      }
+    },
+    defaultTheme: true
   },
   mounted: function() {
     this.clockTime()        
@@ -71,6 +82,24 @@ new Vue({
     hideMessage: function(event) {
         event.currentTarget.classList.remove('new-update_show')
         window.location.reload()
+    },
+    changeTheme: function () {
+      if ( this.defaultTheme ) {
+        this.setDarkTheme()
+      } else {
+        this.setLigthTheme()
+      }
+      this.defaultTheme = !this.defaultTheme
+    },
+    setTheme: function (theme) {
+      document.documentElement.style.setProperty('--main-bg-color', theme.bg)
+      document.documentElement.style.setProperty('--main-font-color', theme.color)
+    },
+    setDarkTheme: function () {
+      this.setTheme(this.themes.dark)
+    },
+    setLigthTheme: function () {
+      this.setTheme(this.themes.light)
     }
   }
 })
