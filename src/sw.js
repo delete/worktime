@@ -1,4 +1,4 @@
-const cacheName = 'worktime1-0-6';
+const cacheName = 'worktime1-1-0';
 const filesToCache = [
   './',
   './index.html',
@@ -9,7 +9,8 @@ const filesToCache = [
   './assets/vue.min.js',
   './assets/favicon.ico',
   './assets/notifications-on.svg',
-  './assets/notifications-off.svg'
+  './assets/theme.svg'
+  './assets/theme-white.svg'
 ];
 
 self.addEventListener('install', function(e) {

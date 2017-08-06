@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 class="title">Work<span class="attention">Time</h1>
+  <h1 class="title">Work<span class="attention">Time</span></h1>
   <div id="app" class="app" v-cloak>
     <img 
         v-if="hasNotificationPermission()" 
@@ -24,6 +24,21 @@
         class="notificationBell"
         alt="Notification is off!"
         title="Your notification is off!"></img>
+
+    <img 
+        v-if="defaultTheme" 
+        src="assets/theme.svg" 
+        class="theme-icon"
+        alt="Change the theme."
+        title="Change the theme."
+        v-on:click="changeTheme"></img>
+    <img 
+        v-else
+        src="assets/theme-white.svg" 
+        class="theme-icon"
+        alt="Change the theme."
+        title="Change the theme."
+        v-on:click="changeTheme"></img>
 
     <form name="work_form" class="form">
       <div>
