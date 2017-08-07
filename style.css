@@ -120,7 +120,7 @@ body {
   opacity: 0;
   transform: translateY(-50px);
   background-color: #FC4349;
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: calc(50% - 111px);
   padding: 2px;
@@ -160,9 +160,9 @@ body {
     width: 26px;
   }
 
-@media screen and (min-height: 639px) {
+@media screen and (min-width: 639px) {
   .theme-icon {
       top: 214px;
-      left: -127px;
+      left: -110px;
   }
 }
