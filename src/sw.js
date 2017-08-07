@@ -9,7 +9,7 @@ const filesToCache = [
   './assets/vue.min.js',
   './assets/favicon.ico',
   './assets/notifications-on.svg',
-  './assets/theme.svg'
+  './assets/theme.svg',
   './assets/theme-white.svg'
 ];
 
