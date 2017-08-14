@@ -1,4 +1,4 @@
-const cacheName = 'worktime1-1-1';
+const cacheName = 'worktime1-2-0';
 const filesToCache = [
   './',
   './index.html',
@@ -9,8 +9,7 @@ const filesToCache = [
   './assets/vue.min.js',
   './assets/favicon.ico',
   './assets/notifications-on.svg',
-  './assets/theme.svg',
-  './assets/theme-white.svg'
+  './assets/theme.svg'
 ];
 
 self.addEventListener('install', function(e) {
@@ -41,14 +40,12 @@ self.addEventListener('activate', function(e) {
         }));
       })
       .then(function () {
-      //console.log('[serviceWorker]: Clients Claims');
         return self.clients.claim();
     })
   ); 
 });
 
 self.addEventListener('fetch', function(e) {
-  //console.log('[ServiceWorker] Fetch', e.request.url);
   e.respondWith(
     caches.match(e.request).then(function(response) {
       return response || fetch(e.request);
