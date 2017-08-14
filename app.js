@@ -18,10 +18,25 @@ new Vue({
         bg: '#fff'
       }
     },
-    defaultTheme: true
+    theme: {
+      set: function (value) {
+        localStorage.setItem('theme', value)
+      },
+      get: function () {
+        return localStorage.getItem('theme')
+      }
+    }
   },
   mounted: function() {
-    this.clockTime()        
+    this.clockTime() 
+
+    // set light as default
+    const currentTheme = this.theme.get()
+    if ( !currentTheme ) {
+      this.theme.set('light')
+    } else {
+      this.setTheme(currentTheme)
+    }
   },
   computed: {
     calculate: function () {          
@@ -62,44 +77,38 @@ new Vue({
         }
         const self = this;
         
-        const notification = new Notification("It's time to get out!", options)
+        const notification = new Notification('It\'s time to get out!', options)
         
         notification.onclick = function (event) {
           event.preventDefault()
           self.notified = true
           options.body = 'See you tomorrow.'
-          new Notification("Notification deactivated for today!", options)
+          new Notification('Notification deactivated for today!', options)
         }
     },
     requestNotificationPermission: function() {
         Notification.requestPermission(function (permission) {
-          return permission === "granted"
+          return permission === 'granted'
         })
     },
     hasNotificationPermission: function() {
-        return Notification.permission === "granted"
+        return Notification.permission === 'granted'
     },
     hideMessage: function(event) {
         event.currentTarget.classList.remove('new-update_show')
         window.location.reload()
     },
     changeTheme: function () {
-      if ( this.defaultTheme ) {
-        this.setDarkTheme()
+      if ( this.theme.get() === 'light' ) {
+        this.setTheme('dark')
       } else {
-        this.setLigthTheme()
+        this.setTheme('light')
       }
-      this.defaultTheme = !this.defaultTheme
     },
     setTheme: function (theme) {
-      document.documentElement.style.setProperty('--main-bg-color', theme.bg)
-      document.documentElement.style.setProperty('--main-font-color', theme.color)
-    },
-    setDarkTheme: function () {
-      this.setTheme(this.themes.dark)
-    },
-    setLigthTheme: function () {
-      this.setTheme(this.themes.light)
+      document.documentElement.style.setProperty('--main-bg-color', this.themes[theme].bg)
+      document.documentElement.style.setProperty('--main-font-color', this.themes[theme].color)
+      this.theme.set(theme)
     }
   }
 })
